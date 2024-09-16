@@ -9,6 +9,7 @@ from app.core.config import settings
 from app.core.db_config import db_conf
 from app.database import Database
 from exceptions.base import ApiError, api_error_handler
+from exceptions.base import include_exception_handlers
 from routes import include_routes
 
 
@@ -30,6 +31,7 @@ def get_application():
         root_path=settings.ROOT_PATH,
     )
     _app.add_exception_handler(ApiError, api_error_handler)
+    include_exception_handlers(_app)
     _app.add_middleware(
         CORSMiddleware,
         allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],

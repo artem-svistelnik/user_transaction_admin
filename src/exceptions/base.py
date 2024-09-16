@@ -1,4 +1,5 @@
 from fastapi import status
+from sqlalchemy.exc import NoResultFound
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
@@ -20,6 +21,19 @@ async def api_error_handler(request: Request, exc: ApiError):
         status_code=exc.status_code,
         content={"detail": exc.detail},
     )
+
+def include_exception_handlers(app):
+    @app.exception_handler(NoResultFound)
+    async def err_404(request: Request, exc: NoResultFound):
+        status_code = 404
+        return JSONResponse(
+            status_code=status_code,
+            content={
+                "status": status_code,
+                "errorCode": "NOT_FOUND",
+                "message": "Your are looking for something that does not exist.",
+            },
+        )
 
 
 class DataConflictError(ApiError):
