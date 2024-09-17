@@ -15,4 +15,3 @@ class UserService(BaseService):
 
     async def get_user(self, pk):
         return await self.user_repo.get_user_by_id(pk)
-

@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>Transaction Statistics</title>
+</head>
+<body>
+<h1>Transaction Statistics</h1>
+<div>
+    <a href="/admin" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #007bff; text-decoration: none; border-radius: 5px;">Back to Admin</a>
+</div>
+<br>
+
+<form action="/admin/statistic" method="get">
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date" value="{{start_date}}">
+    <label for="end_date">End Date:</label>
+    <input type="date" id="end_date" name="end_date" value="{{end_date}}">
+    <input type="submit" value="Filter">
+</form>
+
+<p><b>Total Transactions: {{count}}</b></p>
+<p><b>Total Sum of Transactions: {{total_sum}}</b></p>
+
+<div>
+
+{% if graph %}
+    <h2>Transaction Graph</h2>
+    <div>
+        <img src="{{ graph }}" alt="Transaction Graph">
+    </div>
+{% else %}
+    <p>No transactions available for the selected dates.</p>
+{% endif %}
+</div>
+</body>
+</html>

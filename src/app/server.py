@@ -5,6 +5,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 import uvloop
 
+from sqladmin import Admin
+
+from admin.admin_models import TransactionAdmin
+from admin.admin_models import UserAdmin
+from admin.routes import StatisticView
 from app.core.config import settings
 from app.core.db_config import db_conf
 from app.database import Database
@@ -25,6 +30,7 @@ class DBSessionMiddleware(BaseHTTPMiddleware):
 
 def get_application():
     asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+
     uvloop.install()
     _app = FastAPI(
         title=settings.PROJECT_NAME,
@@ -47,6 +53,15 @@ def get_application():
     async def open_database_connection_pools():
         db_connection = await Database(db_conf)  # noqa
         _app.state.db = db_connection
+        admin = Admin(
+            app=_app,
+            engine=_app.state.db.engine,
+            debug=True,
+            templates_dir="admin/templates",
+        )
+        admin.add_view(UserAdmin)
+        admin.add_view(TransactionAdmin)
+        admin.add_view(StatisticView)
 
     @_app.on_event("shutdown")
     async def close_database_connection_pools():

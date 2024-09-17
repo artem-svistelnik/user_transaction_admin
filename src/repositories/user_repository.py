@@ -28,14 +28,9 @@ class UserRepository(GenericRepository[User]):
         results = await self._run_query(query)
         return results[0].unique().scalars().one()
 
-
     async def get_users(self):
-        query = (
-            select(self.model)
-            .options(
-                joinedload(self.model.transactions),
-            )
+        query = select(self.model).options(
+            joinedload(self.model.transactions),
         )
         results = await self._run_query(query)
         return results[0].unique().scalars().all()
-
