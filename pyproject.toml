@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "user-transaction-admin"
+version = "0.1.0"
+description = ""
+authors = ["Artem Svistelnik <artem.svistelnik@gmail.com>"]
+readme = "README.md"
+packages = [{include = "user_transaction_admin"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.114.2"
+sqlalchemy = "^2.0.34"
+alembic = "^1.13.2"
+pydantic = "^2.9.1"
+pydantic-settings = "^2.5.2"
+uvicorn = "^0.30.6"
+asyncpg = "^0.29.0"
+uvloop = "^0.20.0"
+dependency-injector = "^4.42.0"
+black = "^24.8.0"
+sqladmin = "^0.19.0"
+plotly = "^5.24.1"
+pandas = "^2.2.2"
+matplotlib = "^3.9.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
