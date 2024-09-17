@@ -10,6 +10,7 @@ class TransactionSchema(BaseSchemaModel):
     amount: float
     created_at: datetime.datetime
 
+
 class CreateTransactionSchema(BaseSchemaModel):
     transaction_type: TransactionType
     amount: float

@@ -22,6 +22,7 @@ async def api_error_handler(request: Request, exc: ApiError):
         content={"detail": exc.detail},
     )
 
+
 def include_exception_handlers(app):
     @app.exception_handler(NoResultFound)
     async def err_404(request: Request, exc: NoResultFound):
