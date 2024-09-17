@@ -1,9 +1,4 @@
-# user_transaction_admin
-user transaction admin
-
-
-
-# The Originals test task
+# The EasyLife test task
 
 *To start the project you need to execute:**
 
